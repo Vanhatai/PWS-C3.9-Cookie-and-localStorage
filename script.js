@@ -40,7 +40,10 @@ function disableCheckboxes() {
   $('.check').each(function() {
     $(this).attr('disabled', true);
   });
-  $('.save-btn').remove();
+  $('.save-btn').text('Очистить хранилище').click(() => {
+    localStorage.clear();
+    location.reload();
+  });
 }
  
 // проверки при загрузке страницы
@@ -48,13 +51,13 @@ $(document).ready(function() {
   // задание 1
   // если есть запись в куки, убрать поле ввода и показать город из куки
   if(getCookie('city')) {
-    $('#cityInput').remove();
     // причесать внешний вид названия города
     const cityName = `${getCookie('city').charAt(0).toUpperCase() + getCookie('city').slice(1).toLowerCase()}`;
-    $('#cityInfo').text(`Ваш город  - ${cityName}`);
-      
+    $('#cityInput').text(`- ${cityName}`);
+    $('#cityInput').attr('disabled', true);
+
     // показать кнопку Удалить данные
-    $('.submit-btn').text('Сбросить город').click(() => {
+    $('.submit-btn').text('Сбросить куки').click(() => {
       deleteCookie('city');
       location.reload();
     });
