@@ -48,6 +48,7 @@ function disableCheckboxes() {
 
 function disableInput() {
   let cityName = `${getCookie('city').charAt(0).toUpperCase() + getCookie('city').slice(1).toLowerCase()}`;
+  console.log(cityName);
   $('#cityInput').val(cityName);
   $('#cityInput').attr('disabled', true);
 }
@@ -101,9 +102,6 @@ $('.save-btn').click(() => {
       console.log(this.id);
       localStorage.setItem(this.id, 'checked');
     };
-    disableCheckboxes();
-  });
-});
     disableCheckboxes();
   });
 });
