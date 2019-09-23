@@ -45,17 +45,19 @@ function disableCheckboxes() {
     location.reload();
   });
 }
- 
+
+function disableInput() {
+  let cityName = `${getCookie('city').charAt(0).toUpperCase() + getCookie('city').slice(1).toLowerCase()}`;
+  $('#cityInput').val(cityName);
+  $('#cityInput').attr('disabled', true);
+}
 // проверки при загрузке страницы
 $(document).ready(function() {
   // задание 1
   // если есть запись в куки, убрать поле ввода и показать город из куки
   if(getCookie('city')) {
-    // причесать внешний вид названия города
-    const cityName = `${getCookie('city').charAt(0).toUpperCase() + getCookie('city').slice(1).toLowerCase()}`;
-    $('#cityInput').text(`- ${cityName}`);
-    $('#cityInput').attr('disabled', true);
-
+    disableInput();
+    
     // показать кнопку Удалить данные
     $('.submit-btn').text('Сбросить куки').click(() => {
       deleteCookie('city');
@@ -99,6 +101,9 @@ $('.save-btn').click(() => {
       console.log(this.id);
       localStorage.setItem(this.id, 'checked');
     };
+    disableCheckboxes();
+  });
+});
     disableCheckboxes();
   });
 });
